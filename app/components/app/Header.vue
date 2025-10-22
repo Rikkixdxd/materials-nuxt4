@@ -3,7 +3,7 @@
         <UiContainer>
             <NuxtLink to="/" class="app-header__logo"><Logo /></NuxtLink>
             <div class="app-header__actions">
-                <UiButton><span>Создать материал</span><Add /></UiButton>
+                <NuxtLink to="/create-material"><UiButton><span>Создать материал</span><Add /></UiButton></NuxtLink>
             </div>
         </UiContainer>
     </header>
@@ -15,6 +15,7 @@ import Add from '~/assets/svgs/Add.svg'
 </script>
 
 <style scoped lang="sass">
+// TODO: сделать стики
 .app-header
     padding: 20px 0
     background-color: $color-surface

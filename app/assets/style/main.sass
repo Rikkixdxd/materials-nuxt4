@@ -6,8 +6,23 @@ body
     font-weight: $font-weight-base
     font-size: $font-size-base
     background-color: $color-bg
+    line-height: $font-line-height-base
 
-h1, h2, h3, h4, h5, h6
-    font-family: 'Source Sans 3', sans-serif
-    font-weight: semibold
+@for $i from 1 through 6
+    h#{$i}
+        font-family: $h-font-family
+        font-weight: $h-font-weight
+h1
+    font-size: $h1-size
+h2
+    font-size: $h2-size
+a
+    text-decoration: none
 
+@media(max-width: 768px)
+    body
+        font-size: $font-size-base-mobile
+    h1
+        font-size: $h1-size-mobile
+    h2
+        font-size: $h2-size-mobile

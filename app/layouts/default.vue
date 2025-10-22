@@ -3,7 +3,6 @@
     <main>
       <slot />
     </main>
-    <AppFooter/>
 </template>
 <script setup lang="ts">
 

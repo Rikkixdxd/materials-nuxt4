@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     { path: '@/components/ui', prefix: 'Ui' },
     { path: '@/components/app', prefix: 'App' }
   ],
+  modules: ['@pinia/nuxt'],
   vite: {
     plugins: [svgLoader()],
     css: {
@@ -28,5 +29,21 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL,
+      // Конечно токены доступа не должны храниться в публичной части конфигурации.
+      // Так сделано потомучто это тестовый проект,
+      // правильнее было бы хранить в серверной части nuxt (server/api)
+      token: process.env.TOKEN,
+    }
+  },
+  nitro: {
+    routeRules: {
+      '/api/**': {
+        proxy: 'https://naukatv.ru/api/test/**',
+      },
+    },
   }
 })

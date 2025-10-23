@@ -1,49 +1,61 @@
+import { defineStore } from "pinia";
+import type { Material, MaterialRaw } from "~/types/Material";
+import { ApiClient } from "~/composables/ApiClient";
+import { Utilities } from "~/composables/Utility";
 
-import { defineStore } from 'pinia'
-import type { Material } from '~/types/Material'
-import { ApiClient } from '~/composables/ApiClient'
+const { makeMaterialType, makeMaterialRawType } = Utilities();
 
-export const UseMaterial = defineStore('UseMaterial', {
+export const UseMaterial = defineStore("UseMaterial", {
+  
   state: () => ({
     materials: [] as Material[],
-    apiClient: null as ReturnType<typeof ApiClient> | null
+    apiClient: null as ReturnType<typeof ApiClient> | null,
+    editingMaterial: null as Material | null,
   }),
+
   actions: {
 
     getApiClient() {
       if (!this.apiClient) {
-        this.apiClient = ApiClient()
+        this.apiClient = ApiClient();
       }
-      return this.apiClient
+      return this.apiClient;
     },
 
     async getMaterialById(id: number): Promise<Material> {
-      const cachedMaterial = this.materials.find(material => material.id === id)
+
+      const cachedMaterial = this.materials.find(
+        (material) => material.id === id
+      );
+
       if (cachedMaterial) {
-        return cachedMaterial
+        return cachedMaterial;
+      }
+      console.log(this.materials);
+      
+      await this.fetchAllMaterials();
+      console.log(this.materials);
+      const material = this.materials.find(m => m.id === id);
+      
+      if(!material) {
+        return Promise.reject(new Error());
       }
 
-      const api = this.getApiClient()
-      const material = await api.GET('/materials/{alias}/{id}', id) 
-
-      this.materials.push(material)
-      return material
+      return material;
     },
 
-    async getAllMaterials(): Promise<Material[]> {
-      if (!this.materials.length) {
-        const api = this.getApiClient()
-        this.materials = await api.GET('/materials/{alias}')
-      }
-      return this.materials
+    async fetchAllMaterials(): Promise<Material[]> {
+      const api = this.getApiClient();
+      const data = await api.GET("/materials/{alias}");
+      this.materials = data.map((item: MaterialRaw) => makeMaterialType(item));
     },
 
-    async createMaterial(material: Material): Promise<Material> {
-      const api = this.getApiClient()
-      const createdMaterial = await api.POST('/materials/{alias}/save', material)
+    async saveMaterial(material: Material): Promise<void> {
 
-      this.materials.push(createdMaterial)
-      return createdMaterial
-    }
-  }
-})
+      const api = this.getApiClient();
+      await api.POST("/materials/{alias}/save", makeMaterialRawType(material));
+      
+      await this.fetchAllMaterials();
+    },
+  },
+});

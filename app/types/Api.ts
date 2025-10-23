@@ -1,11 +1,11 @@
-import { type Material } from "./Material";
+import { type MaterialRaw } from "./Material";
 
 export type ApiPaths = {
     GET: {
-        '/materials/{alias}': Material[];
-        '/materials/{alias}/{id}': Material;
+        '/materials/{alias}': MaterialRaw[];
+        '/materials/{alias}/{id}': MaterialRaw;
     },
     POST: {
-        '/materials/{alias}/save': Material
+        '/materials/{alias}/save': MaterialRaw
     }
 }

@@ -8,8 +8,8 @@
 
 <script setup lang="ts">
 
-definePageMeta({
-    title: 'Создание материала'
-})
+useHead(() => ({
+  title: 'Создание материала'
+}))
 
 </script>

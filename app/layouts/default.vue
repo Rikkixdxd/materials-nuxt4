@@ -5,15 +5,15 @@
         <div v-if="Router.currentRoute.value.path !== '/'" class="back">
           <NuxtLink to="/"><Arrow /> Назад</NuxtLink>
         </div>
-        <h1>{{ Router.currentRoute.value.meta.title }}</h1>
+        <h1 v-if="Router.currentRoute.value.path ! === '/material/'">{{ PageName }}</h1>
       </UiContainer>
       <slot />
     </main>
 </template>
-<script setup lang="ts">  
+<script setup lang="ts">
 import Arrow from '~/assets/svgs/Arrow.svg'
 const Router = useRouter();
-const useMaterial = UseMaterial();
+const PageName = computed(() => document.title);
 </script>
 
 <style scoped lang="sass">

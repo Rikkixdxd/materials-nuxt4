@@ -8,9 +8,9 @@
 const useMaterial = UseMaterial();
 const Router = useRouter();
 const material = ref(useMaterial.getMaterialById(parseInt(Router.currentRoute.value.params.id as string)));
-definePageMeta({
+useHead(() => ({
     title: 'Редактирование материала'
-})
+}))
 
 </script>
 

@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   app:{
     head: {
+      title: 'Материалы',
       link: [
         { rel: 'preload', as: 'font', href: '/fonts/FuturaPT-Book.ttf', type: 'font/ttf', crossorigin: 'anonymous' },
         { rel: 'preload', as: 'font', href: '/fonts/FuturaPT-Medium.ttf', type: 'font/ttf', crossorigin: 'anonymous' },

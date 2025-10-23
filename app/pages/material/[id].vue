@@ -40,6 +40,11 @@ onMounted(async () => {
     isFetching.value = false;
     
 });
+
+useHead(() => ({
+    title: material.value?.title ?? 'Материал'
+}))
+
 </script>
 
 <style scoped lang="sass">

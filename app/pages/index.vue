@@ -27,9 +27,11 @@
 import Calendar from '@/assets/svgs/Calendar.svg'
 import { UseMaterial } from '~/stores/UseMaterial';
 import { Utilities } from '~/composables/Utility';
-definePageMeta({
-    title: 'Материалы'
-})
+
+useHead(() => ({
+  title: 'Материалы'
+}))
+
 const { convertDate } = Utilities();
 const useMaterial = UseMaterial();
 const isFetching = ref(true);

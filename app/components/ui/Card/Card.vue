@@ -20,8 +20,9 @@ const props = defineProps({
     flex-direction: column
     gap: 20px
     transition: all 0.1s ease
-
+    box-sizing: border-box
+    word-break: break-word
 .ui-card--hover
     &:hover
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+        box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1)
 </style>

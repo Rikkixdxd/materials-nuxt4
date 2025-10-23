@@ -1,13 +1,15 @@
 <template>
-    <div>
-
-    </div>
+    <UiContainer>
+        <ClientOnly>
+            <LazyMaterialEditor :material="{}" />
+        </ClientOnly>
+    </UiContainer>
 </template>
 
 <script setup lang="ts">
 
+definePageMeta({
+    title: 'Создание материала'
+})
+
 </script>
-
-<style scoped>
-
-</style>

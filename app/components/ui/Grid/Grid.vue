@@ -54,4 +54,7 @@ const gridClasses = computed(() => {
           &--cols-desktop-#{$i}
               grid-template-columns: repeat(#{$i}, minmax(0, 1fr))
 
+    @media(max-width: 540px)
+      gap: 16px !important
+
 </style>

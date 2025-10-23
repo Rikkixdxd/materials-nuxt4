@@ -3,7 +3,16 @@
         <UiContainer>
             <NuxtLink to="/" class="app-header__logo"><Logo /></NuxtLink>
             <div class="app-header__actions">
-                <NuxtLink to="/create-material"><UiButton><span>Создать материал</span><Add /></UiButton></NuxtLink>
+                <NuxtLink v-if="Button.link" :to="Button.link">
+                    <UiButton>
+                        <span>{{ Button.text }}</span>
+                        <Add />
+                    </UiButton>
+                </NuxtLink>
+                <UiButton v-else @click="handleClick">
+                    <span>{{ Button.text }}</span>
+                    <Save />
+                </UiButton>
             </div>
         </UiContainer>
     </header>
@@ -12,6 +21,28 @@
 <script setup lang="ts">
 import Logo from '~/assets/svgs/Logo.svg'
 import Add from '~/assets/svgs/Add.svg'
+import Save from '~/assets/svgs/Save.svg'
+
+const Router = useRouter();
+const useMaterial = UseMaterial();
+const handleClick = async () => {
+    await useMaterial.saveMaterial(useMaterial.editingMaterial!)
+    Router.push('/');
+}
+const Button = computed(() => {
+    if(Router.currentRoute.value.path === '/create-material') {
+        return {
+            text: 'Сохранить',
+            link: null
+        };
+    }
+
+    return {
+        text: 'Создать материал',
+        link: '/create-material'
+    };
+}); 
+
 </script>
 
 <style scoped lang="sass">

@@ -1,75 +1,90 @@
-# Nuxt Minimal Starter
+# Тестовое задание: фронтенд
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Одностраничное приложение на Nuxt 3 с тремя экранами:
 
-## Setup
+1) **Список материалов** — загрузка списка через API, сортировка по дате (свежее выше), ссылка на детальную.  
+2) **Детальная страница** — загрузка данных материала через API по `id`.  
+3) **Создание материала** — форма с полями + WYSIWYG (минимальный набор: параграф, H1–H3, цитата) и отправка на сервер.
 
-Make sure to install dependencies:
+## Ресурсы из ТЗ
 
-```bash
-# npm
-npm install
+- **Макет Figma**: ссылка из ТЗ.  
+- **Шрифты**: Furura PT, Source Sans 3.  
+- **API** (где `{alias}` — ваш персональный код):
+  - Список: `GET https://example.com/api/test/materials/{alias}`
+  - Детальная: `GET https://example.com/api/test/materials/{alias}/`
+  - Создание: `POST https://example.com/api/test/materials/{alias}/save`
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
 
-# bun
-bun install
-```
+---
 
-## Development Server
+## Демонстрация
 
-Start the development server on `http://localhost:3000`:
+- **Desktop** — обязательно  
+- **Mobile** — по возможности (адаптивная сетка, типографика, отступы)
 
-```bash
-# npm
-npm run dev
+---
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
+## Быстрый старт
 
 ```bash
-# npm
-npm run build
+# 1) Клонирование
+git clone https://github.com/Rikkixdxd/materials-nuxt4.git
+cd materials-nuxt4.git
 
-# pnpm
-pnpm build
+# 2) Установка
+pnpm i       # или npm i / yarn
 
-# yarn
-yarn build
+# 3) Переменные окружения
+cp .env.example .env
+# отредактируйте если надо .env: 
+# TOKEN = tkach
+# API_BASE_URL = /api
 
-# bun
-bun run build
+# 4) Запуск dev-сервера
+npm run dev     # http://localhost:3000
+
 ```
 
-Locally preview production build:
+### Скрипты
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```json
+{
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit"
+  }
+}
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## Переменные окружения
+
+`.env.example`:
+```ini
+# персональный alias из письма по тестовому
+TOKEN=your_alias_code
+
+# путь апи
+API_BASE_URL=https://example.com
+```
+
+Доступ в коде: `useRuntimeConfig().public.TOKEN`.
+
+---
+
+## Страницы и роутинг
+
+| Путь | Назначение |
+|---|---|
+| `/` | Список материалов |
+| `/material/:id` | Детальная страница материала |
+| `/create-material` | Создание материала (WYSIWYG) |
+
+---

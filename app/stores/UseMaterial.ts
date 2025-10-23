@@ -31,10 +31,7 @@ export const UseMaterial = defineStore("UseMaterial", {
       if (cachedMaterial) {
         return cachedMaterial;
       }
-      console.log(this.materials);
-      
       await this.fetchAllMaterials();
-      console.log(this.materials);
       const material = this.materials.find(m => m.id === id);
       
       if(!material) {

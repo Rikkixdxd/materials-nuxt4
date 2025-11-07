@@ -11,7 +11,8 @@ export default defineNuxtConfig({
         { rel: 'preload', as: 'font', href: '/fonts/FuturaPT-Medium.ttf', type: 'font/ttf', crossorigin: 'anonymous' },
         { rel: 'preload', as: 'font', href: '/fonts/SourceSans3-VariableFont_wght.ttf', type: 'font/ttf', crossorigin: 'anonymous' },
       ]
-    }
+    },
+    baseURL: '/materials-nuxt4/'
   },
   devtools: { enabled: true },
   css: ['@/assets/style/main.sass'],
@@ -46,5 +47,7 @@ export default defineNuxtConfig({
         proxy: 'https://naukatv.ru/api/test/**',
       },
     },
-  }
+  },
+  ssr: false,
+  target: 'static',
 })
